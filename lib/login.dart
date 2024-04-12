@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'home.dart';
 void main() {
   runApp(LoginApp());
 }
@@ -25,7 +25,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  bool _rememberMe = false; // สร้างตัวแปรสำหรับเก็บค่าของ Remember Me
+  bool _rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,9 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // รูปภาพข้างบน
               Image.asset(
-                'assets/login.png', // ระบุ path ของรูปภาพใน assets
-                height: 150.0, // กำหนดความสูงของรูปภาพ
+                'assets/login.png',
+                height: 150.0,
               ),
               Padding(
                 padding: EdgeInsets.all(30),
@@ -51,40 +50,41 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  labelText: 'Username', // เพิ่ม labelText เพื่อแสดงข้อความบนกล่องใส่ข้อความ
-                  border: OutlineInputBorder(), // เพิ่ม border เพื่อสร้างเส้นขอบรอบกล่องใส่ข้อความ
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0), // กำหนดขนาดกล่องใส่ข้อความ
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 ),
               ),
               SizedBox(height: 20.0),
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  labelText: 'Password', // เพิ่ม labelText เพื่อแสดงข้อความบนกล่องใส่ข้อความ
-                  border: OutlineInputBorder(), // เพิ่ม border เพื่อสร้างเส้นขอบรอบกล่องใส่ข้อความ
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0), // กำหนดขนาดกล่องใส่ข้อความ
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 ),
                 obscureText: true,
               ),
               SizedBox(height: 20.0),
               Row(
                 children: [
-                  Text('Remember Me'), // เลื่อนข้อความ "Remember Me" ไปด้านซ้ายสุดของ Row
+                  Text('Remember Me'),
                   Checkbox(
                     value: _rememberMe,
                     onChanged: (bool? value) {
                       setState(() {
-                        _rememberMe = value ?? false; // อัปเดตค่าของ Remember Me
+                        _rememberMe = value ?? false;
                       });
                     },
                   ),
-                  Spacer(), // ใช้ Spacer เพื่อช่วยให้ปุ่ม Register อยู่ด้านขวา
+                  Spacer(),
                   ElevatedButton(
                     onPressed: () {
                       // Add your authentication logic here
                       String username = _usernameController.text;
                       String password = _passwordController.text;
-                      // Example: validate login credentials
                       if (username == 'admin' && password == 'password') {
                         // Navigate to another screen or perform an action
                         // after successful login
@@ -98,20 +98,57 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
+              SizedBox(height: 80.0),
+              Column(
+                children: [
+                  SizedBox(height: 10.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/facebook.png'),
+                        radius: 15,
+                      ),
+                      SizedBox(width: 10),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/google.png'),
+                        radius: 15,
+                      ),
+                      SizedBox(width: 10),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/ig.png'),
+                        radius: 15,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    'Log in with social',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 20.0),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add registration logic here
-                      print('Go to home page');
-                    },
-                    child: Text('Login'),
+                  // Navigate to home page
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()), // HomePage() เป็นหน้า Home ที่คุณสร้างขึ้น
+                  );
+                },
+
+                    child: Text('Log-in'),
                   ),
                 ),
               ),
-              SizedBox(height: 50.0), // Add SizedBox for spacing
+              SizedBox(height: 50.0), 
             ],
           ),
         ),

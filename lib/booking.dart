@@ -23,49 +23,94 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
+  TextEditingController _numberOfPeopleController = TextEditingController();
+  TextEditingController _numberOfRoomsController = TextEditingController();
+  String? _selectedPaymentMethod;
+  DateTime? _selectedDate;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 1),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Booking'),
+        title: Text('Reserved'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
             TextFormField(
-              controller: _nameController,
+              controller: _numberOfPeopleController,
               decoration: InputDecoration(labelText: 'จำนวนคน'),
             ),
-            SizedBox(height: 20.0),
             TextFormField(
-              controller: _dateController,
+              controller: _numberOfRoomsController,
               decoration: InputDecoration(labelText: 'จำนวนห้อง'),
-              keyboardType: TextInputType.datetime,
             ),
-            
             SizedBox(height: 20.0),
-            TextFormField(
-              controller: _dateController,
+            DropdownButtonFormField<String>(
+              value: _selectedPaymentMethod,
+              onChanged: (newValue) {
+                setState(() {
+                  _selectedPaymentMethod = newValue;
+                });
+              },
+              items: [
+                DropdownMenuItem(
+                  child: Text('ชำระผ่านแอพธนาคาร'),
+                  value: 'ชำระผ่านแอพธนาคาร',
+                ),
+                DropdownMenuItem(
+                  child: Text('ชำระผ่านบัตรเครดิต'),
+                  value: 'ชำระผ่านบัตรเครดิต',
+                ),
+                DropdownMenuItem(
+                  child: Text('ชำระผ่านเงินสด'),
+                  value: 'ชำระผ่านเงินสด',
+                ),
+              ],
               decoration: InputDecoration(labelText: 'วิธีชำระเงิน'),
-              keyboardType: TextInputType.datetime,
             ),
             SizedBox(height: 20.0),
+            GestureDetector(
+              onTap: () => _selectDate(context),
+              child: AbsorbPointer(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'วันที่',
+                    suffixIcon: Icon(Icons.calendar_today),
+                  ),
+                  controller: TextEditingController(
+                    text: _selectedDate != null ? _selectedDate.toString().substring(0, 10) : 'N/A',
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 350.0),
             ElevatedButton(
               onPressed: () {
-                String name = _nameController.text;
-                String date = _dateController.text;
-                // ทำการจองโดยใช้ข้อมูล name และ date
-                // ในที่นี้เราจะแค่แสดงข้อความที่ต้องการจอง
+                String numberOfPeople = _numberOfPeopleController.text;
+                String numberOfRooms = _numberOfRoomsController.text;
+                String date = _selectedDate != null ? _selectedDate.toString().substring(0, 10) : 'N/A';
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text('Confirmation'),
-                      content: Text('Booking for $name on $date'),
+                      content: Text('Booking for $numberOfPeople people in $numberOfRooms rooms on $date with payment method: $_selectedPaymentMethod'),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -78,7 +123,7 @@ class _BookingPageState extends State<BookingPage> {
                   },
                 );
               },
-              child: Text('Book'),
+              child: Text('Confirm'),
             ),
           ],
         ),

@@ -22,8 +22,7 @@ class HotelDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hotel Details Page'),
-   
+        title: Text(''),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(60.0),
           child: Padding(
@@ -61,18 +60,41 @@ class HotelDetailsPage extends StatelessWidget {
                   'นาซ่า กรุงเทพ 44 ถ. สุขุมวิท 71 แขวงสวนหลวง,กรุงเทพ,ไทย 10250',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 8.0),
-                ElevatedButton(
-                  onPressed: () {
-                    // โค้ดเมื่อกดปุ่ม "จอง" จะมีได้แบบตัวอย่างเท่านั้น
-                    print('Booking hotel...');
-                  },
-                  child: Text('จอง'),
+                SizedBox(height: 8.0), // ระยะห่างด้านบน 8.0
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      'assets/detail1.png', // ตำแหน่งของไฟล์รูปภาพในโฟลเดอร์ assets
+                      width: 150.0,
+                      height: 150.0,
+                    ),
+                    Image.asset(
+                      'assets/detail2.png', // ตำแหน่งของไฟล์รูปภาพในโฟลเดอร์ assets
+                      width: 150.0,
+                      height: 150.0,
+                    ),
+                    Image.asset(
+                      'assets/detail3.png', // ตำแหน่งของไฟล์รูปภาพในโฟลเดอร์ assets
+                      width: 150.0,
+                      height: 150.0,
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            // โค้ดเมื่อกดปุ่ม "จอง" จะมีได้แบบตัวอย่างเท่านั้น
+            print('Booking hotel...');
+          },
+          child: Text('จอง'),
+        ),
       ),
     );
   }
