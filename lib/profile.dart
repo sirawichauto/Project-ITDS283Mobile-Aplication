@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'login.dart';
 void main() {
   runApp(MyApp());
 }
@@ -36,6 +36,18 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(''),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()), // ให้ไปยังหน้า Login
+          );
+              // เพิ่มโค้ดสำหรับการออกจากระบบที่นี่
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -44,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: <Widget>[
             CircleAvatar(
               radius: 100,
-              backgroundImage: AssetImage('assets/pro2.png'), // รูปโปรไฟล์
+              backgroundImage: AssetImage('assets/profile4.png'), // รูปโปรไฟล์
             ),
             SizedBox(height: 30),
             TextFormField(
@@ -104,12 +116,12 @@ class _ProfilePageState extends State<ProfilePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.directions_car), // เปลี่ยน icon จาก search เป็น Mytrips
-            label: 'Mytrips', // เปลี่ยน label จาก Search เป็น Mytrips
+            icon: Icon(Icons.directions_car),
+            label: 'Mytrips',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart), // เปลี่ยน icon จาก favorite เป็น Cart
-            label: 'Cart', // เปลี่ยน label จาก Favorites เป็น Cart
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

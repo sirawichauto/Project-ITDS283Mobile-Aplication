@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 50.0),
               Image.asset(
                 'assets/home1.png',
                 width: 350,
