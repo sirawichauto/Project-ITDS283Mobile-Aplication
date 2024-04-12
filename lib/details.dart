@@ -22,17 +22,21 @@ class HotelDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('รายละเอียดที่พัก'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // เมื่อคลิกที่ไอคอนค้นหา
-              // ใส่โค้ดเพื่อเปิดหน้าค้นหาหรือทำการค้นหาข้อมูล
-              print('Search button clicked');
-            },
+        title: Text('Hotel Details Page'),
+   
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(60.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'ค้นหาโรงแรม...',
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+              ),
+            ),
           ),
-        ],
+        ),
       ),
       body: ListView(
         children: [

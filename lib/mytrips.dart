@@ -43,14 +43,15 @@ class MyTripPage extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/mytrip2.png',
-                  width: 200.0,
-                  height: 200.0,
+                  width: 100.0,
+                  height: 100.0,
                 ),
                 SizedBox(width: 10), // Add space between image and text
                 Text(
-                  'ห้องดีรักต์เตียงคิงส์ไซต์',
+                  'ห้องดีรักต์เตียงคิงส์ไซต์ 1 เตียง',
                   style: TextStyle(fontSize: 16.0),
                 ),
+              
               ],
             ),
           ),

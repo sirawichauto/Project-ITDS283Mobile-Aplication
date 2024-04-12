@@ -48,23 +48,28 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(30),
               ),
               SizedBox(height: 20.0),
-              TextField(
+              TextFormField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  hintText: 'Username',
+                  labelText: 'Username', // เพิ่ม labelText เพื่อแสดงข้อความบนกล่องใส่ข้อความ
+                  border: OutlineInputBorder(), // เพิ่ม border เพื่อสร้างเส้นขอบรอบกล่องใส่ข้อความ
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0), // กำหนดขนาดกล่องใส่ข้อความ
                 ),
               ),
               SizedBox(height: 20.0),
-              TextField(
+              TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  hintText: 'Password',
+                  labelText: 'Password', // เพิ่ม labelText เพื่อแสดงข้อความบนกล่องใส่ข้อความ
+                  border: OutlineInputBorder(), // เพิ่ม border เพื่อสร้างเส้นขอบรอบกล่องใส่ข้อความ
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0), // กำหนดขนาดกล่องใส่ข้อความ
                 ),
                 obscureText: true,
               ),
               SizedBox(height: 20.0),
               Row(
                 children: [
+                  Text('Remember Me'), // เลื่อนข้อความ "Remember Me" ไปด้านซ้ายสุดของ Row
                   Checkbox(
                     value: _rememberMe,
                     onChanged: (bool? value) {
@@ -73,14 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                   ),
-                  Text('Remember Me'), // เพิ่ม Text สำหรับแสดงข้อความ "Remember Me"
-                ],
-              ),
-              SizedBox(height: 20.0),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
+                  Spacer(), // ใช้ Spacer เพื่อช่วยให้ปุ่ม Register อยู่ด้านขวา
+                  ElevatedButton(
                     onPressed: () {
                       // Add your authentication logic here
                       String username = _usernameController.text;
@@ -94,6 +93,19 @@ class _LoginPageState extends State<LoginPage> {
                         // Show error message or handle invalid credentials
                         print('Invalid username or password');
                       }
+                    },
+                    child: Text('register'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.0),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Add registration logic here
+                      print('Go to home page');
                     },
                     child: Text('Login'),
                   ),
