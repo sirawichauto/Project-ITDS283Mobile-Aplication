@@ -40,8 +40,8 @@ class HotelDetailsPage extends StatelessWidget {
       body: ListView(
         children: [
           Image.network(
-            'https://example.com/hotel_image.jpg', // URL ของรูปภาพโรงแรม
-            fit: BoxFit.cover, // ปรับขนาดรูปภาพให้พอดีกับพื้นที่ที่กำหนด
+            'https://example.com/hotel_image.jpg',
+            fit: BoxFit.cover,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -60,24 +60,35 @@ class HotelDetailsPage extends StatelessWidget {
                   'นาซ่า กรุงเทพ 44 ถ. สุขุมวิท 71 แขวงสวนหลวง,กรุงเทพ,ไทย 10250',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 8.0), // ระยะห่างด้านบน 8.0
-                Column(
+                SizedBox(height: 8.0), // Add spacing between rows
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
-                      'assets/detail1.png', // ตำแหน่งของไฟล์รูปภาพในโฟลเดอร์ assets
-                      width: 150.0,
-                      height: 150.0,
+                      'assets/detail1.png',
+                      width: 300.0,
+                      height: 300.0,
                     ),
-                    Image.asset(
-                      'assets/detail2.png', // ตำแหน่งของไฟล์รูปภาพในโฟลเดอร์ assets
-                      width: 150.0,
-                      height: 150.0,
+                  ],
+                ),
+                SizedBox(height: 8.0), // Add spacing between rows
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        'assets/detail2.png',
+                        width: 150.0,
+                        height: 150.0,
+                      ),
                     ),
-                    Image.asset(
-                      'assets/detail3.png', // ตำแหน่งของไฟล์รูปภาพในโฟลเดอร์ assets
-                      width: 150.0,
-                      height: 150.0,
+                    SizedBox(width: 8.0), // Add spacing between images
+                    Expanded(
+                      child: Image.asset(
+                        'assets/detail3.png',
+                        width: 150.0,
+                        height: 150.0,
+                      ),
                     ),
                   ],
                 ),
@@ -90,7 +101,6 @@ class HotelDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
           onPressed: () {
-            // โค้ดเมื่อกดปุ่ม "จอง" จะมีได้แบบตัวอย่างเท่านั้น
             print('Booking hotel...');
           },
           child: Text('จอง'),
