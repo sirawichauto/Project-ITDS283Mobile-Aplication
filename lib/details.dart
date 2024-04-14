@@ -37,65 +37,132 @@ class HotelDetailsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          Image.network(
-            'https://example.com/hotel_image.jpg',
-            fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'รายละเอียดที่พัก',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24.0,
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'รายละเอียดที่พัก',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0,
                 ),
-                SizedBox(height: 8.0),
-                Text(
-                  'นาซ่า กรุงเทพ 44 ถ. สุขุมวิท 71 แขวงสวนหลวง,กรุงเทพ,ไทย 10250',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 8.0), // Add spacing between rows
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
+              ),
+              SizedBox(height: 8.0), // Add spacing between rows
+              Text(
+                'นาซ่า กรุงเทพ 44 ถ. สุขุมวิท 71 แขวงสวนหลวง,กรุงเทพ,ไทย 10250',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              SizedBox(height: 8.0), // Add spacing between rows
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: Image.asset(
                       'assets/detail1.png',
                       width: 300.0,
-                      height: 300.0,
+                      height: 200.0,
                     ),
-                  ],
-                ),
-                SizedBox(height: 8.0), // Add spacing between rows
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
+                  ),
+                ],
+              ),
+              SizedBox(height: 3.0), // Add spacing between rows
+              // Add spacing between rows
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(0),
                       child: Image.asset(
                         'assets/detail2.png',
-                        width: 150.0,
-                        height: 150.0,
+                        width: 200.0,
+                        height: 200.0,
                       ),
                     ),
-                    SizedBox(width: 8.0), // Add spacing between images
-                    Expanded(
+                  ),
+                  SizedBox(width: 3.0), // Add spacing between images
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(.0),
                       child: Image.asset(
                         'assets/detail3.png',
-                        width: 150.0,
-                        height: 150.0,
+                        width: 200.0,
+                        height: 200.0,
                       ),
                     ),
-                  ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.0), // Add spacing between rows
+              Text(
+                'ห้องพัก',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: 8.0), // Add spacing between text and button
+              Text(
+                'ห้องอาหาร',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+              SizedBox(height: 8.0), // Add spacing between text and button
+              Text(
+                'สำหรับธุรกิจและประชุม',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+              SizedBox(height: 8.0), // Add spacing between text and button
+              Text(
+                'พื้นที่ส่วนกลาง',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+              SizedBox(height: 8.0), // Add spacing between text and button
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Wifi ส่วนกลาง',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      // Handle location button press
+                      print('Location button pressed');
+                    },
+                    icon: Icon(Icons.location_on),
+                    label: Text('Location'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.0), // Add spacing between text and button
+              Row(
+                children: [
+                  Icon(Icons.star, color: Colors.yellow), // ดาวที่ 1
+                  Icon(Icons.star, color: Colors.yellow), // ดาวที่ 2
+                  Icon(Icons.star, color: Colors.yellow), // ดาวที่ 3
+                  Icon(Icons.star, color: Colors.yellow), // ดาวที่ 4
+                  Icon(Icons.star, color: Colors.yellow), // ดาวที่ 5
+                ],
+              )
+            ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -103,7 +170,7 @@ class HotelDetailsPage extends StatelessWidget {
           onPressed: () {
             print('Booking hotel...');
           },
-          child: Text('จอง'),
+          child: Text('Booking'),
         ),
       ),
     );
