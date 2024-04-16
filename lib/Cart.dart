@@ -31,6 +31,8 @@ class _MyTripPageState extends State<MyTripPage> {
     });
   }
 
+  bool _isChecked = false; // Add this line to track checkbox state
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,10 +58,11 @@ class _MyTripPageState extends State<MyTripPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/mytrip2.png',
-                  width: 150.0,
-                  height: 150.0,
+                  'assets/cart1.png',
+                  width: 200.0,
+                  height: 100.0,
                 ),
+                
                 SizedBox(width: 10), // Add space between image and text
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,14 +70,91 @@ class _MyTripPageState extends State<MyTripPage> {
                     Text(
                       'นาซ่า กรุงเทพ',
                       style: TextStyle(fontSize: 16.0),
-                    ),   
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.yellow), // ดาวที่ 1
+                        Icon(Icons.star, color: Colors.yellow), // ดาวที่ 2
+                        Icon(Icons.star, color: Colors.yellow), // ดาวที่ 3
+                        Icon(Icons.star, color: Colors.yellow), // ดาวที่ 4
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Icon(
+                            Icons.location_on,
+                            size: 20,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        Text(
+                          'Bangkok',
+                          style: TextStyle(fontSize: 14.0, color: Colors.blue),
+                        ),
+                      ],
+                    ),
+                    
                   ],
                 ),
+                
               ],
             ),
+            
           ),
+          
+          Padding(
+  padding: EdgeInsets.only(left: 20.0), // ให้มีการขยับเข้ามาจากขอบด้านข้าง 20.0
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        children: [
+          Checkbox(
+            value: _isChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                _isChecked = value ?? false;
+              });
+            },
+          ),
+          SizedBox(width: 8.0), // เพิ่มระยะห่างระหว่าง Checkbox กับข้อความ
+          Text('1 x Deluxe Room'), // เพิ่มข้อความ "Deluxe" ด้านข้าง Checkbox
         ],
       ),
+      
+    ],
+  ),
+),
+
+Padding(
+  padding: EdgeInsets.symmetric(horizontal: 35.0), // ให้มีการขยับเข้ามาจากขอบด้านข้าง 35.0
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('12 Mar - 13 Mar, 2024 (1 night)'), // ข้อความ "12 Mar - 13 Mar, 2024 (1 night)" อยู่ด้านล่างของ Row
+      SizedBox(height: 4.0), // เพิ่มระยะห่างระหว่างข้อความและ icon ฿
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SizedBox(height: 50),
+           // เพิ่มระยะห่างระหว่าง icon และข้อความ
+          Text(
+            '1250 ฿',
+            textAlign: TextAlign.center, 
+          ),
+           // เพิ่มข้อความ 1250
+        ],
+        
+      ),
+    ],
+  ),
+),
+
+],
+),
+      
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
