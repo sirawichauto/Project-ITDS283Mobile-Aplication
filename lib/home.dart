@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'details.dart';
+import 'mytrips.dart';
+import 'Cart.dart';
+import 'profile.dart';
 void main() {
   runApp(HomeApp());
 }
@@ -12,9 +15,13 @@ class HomeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue.withOpacity(0.8), // เพิ่มความโปร่งใสให้กับ Navigation Bar
+          backgroundColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8), // เพิ่มความโปร่งใสให้กับ Navigation Bar
         ),
       ),
+      // เพิ่มการกำหนดเส้นทางของหน้า DetailsPage
+      routes: {
+        '/details': (context) => HotelDetailsPage(),
+      },
       home: HomePage(),
     );
   }
@@ -28,10 +35,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
+   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    switch (index) {
+      case 1: // หน้า Home
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => CartApp()),
+        );
+        break;
+      case 2: // หน้า Cart
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MyTripApp()),
+        );
+        break;
+
+      case 3: // หน้า Profile
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+
+      default:
+        break;
+    }
   }
 
   @override
@@ -41,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           'Home',
           style: TextStyle(
-            color: Colors.white, // กำหนดสีของข้อความใน title เป็นสีขาว
+            color: Colors.white,
           ),
         ),
         actions: [
@@ -70,30 +101,70 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 50.0),
-              Image.asset(
-                'assets/home1.png',
-                width: 350,
-                height: 350,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HotelDetailsApp()),
+                  );
+                },
+                child: Image.asset(
+                  'assets/home1.png',
+                  width: 350,
+                  height: 350,
+                ),
               ),
-              Image.asset(
-                'assets/home2.png',
-                width: 350,
-                height: 350,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HotelDetailsApp()),
+                  );
+                },
+                child: Image.asset(
+                  'assets/home2.png',
+                  width: 350,
+                  height: 350,
+                ),
               ),
-              Image.asset(
-                'assets/home3.png',
-                width: 350,
-                height: 350,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HotelDetailsApp()),
+                  );
+                },
+                child: Image.asset(
+                  'assets/home3.png',
+                  width: 350,
+                  height: 350,
+                ),
               ),
-              Image.asset(
-                'assets/home4.png',
-                width: 350,
-                height: 350,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HotelDetailsApp()),
+                  );
+                },
+                child: Image.asset(
+                  'assets/home4.png',
+                  width: 350,
+                  height: 350,
+                ),
               ),
-              Image.asset(
-                'assets/home5.png',
-                width: 350,
-                height: 350,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HotelDetailsApp()),
+                  );
+                },
+                child: Image.asset(
+                  'assets/home5.png',
+                  width: 350,
+                  height: 350,
+                ),
               ),
             ],
           ),
@@ -105,15 +176,15 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.blue,
             icon: Icon(Icons.home),
             label: 'Home',
+          ),BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.directions_car), // เปลี่ยน icon จาก search เป็น Mytrips
-            label: 'Mytrips', // เปลี่ยน label จาก Search เป็น Mytrips
+            icon: Icon(Icons.directions_car),
+            label: 'Mytrips',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart), // เปลี่ยน icon จาก favorite เป็น Cart
-            label: 'Cart', // เปลี่ยน label จาก Favorites เป็น Cart
-          ),
+          
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',

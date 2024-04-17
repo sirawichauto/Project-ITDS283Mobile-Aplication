@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'home.dart';
+import 'mytrips.dart';
+import 'Cart.dart';
 void main() {
   runApp(MyApp());
 }
@@ -25,11 +28,39 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   int _selectedIndex = 3; // เริ่มต้นที่ Index 3 (Profile)
 
-  void _onItemTapped(int index) {
+   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    switch (index) {
+      case 1: // หน้า Home
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+        break;
+
+     
+
+      case 2: // หน้า Cart
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MyTripApp()),
+        );
+        break;
+
+      case 3: // หน้า Profile
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => CartApp()),
+        );
+        break;
+
+      default:
+        break;
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'home.dart';
+import 'booking.dart';
 void main() {
   runApp(HotelDetailsApp());
 }
@@ -23,6 +24,17 @@ class HotelDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(''),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => HomePage()), // HomePage() เป็นหน้า Home ที่คุณสร้างขึ้น
+);
+
+
+          },
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(60.0),
           child: Padding(
@@ -158,6 +170,14 @@ class HotelDetailsPage extends StatelessWidget {
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 3
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 4
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 5
+                  SizedBox(width: 120.0), 
+                  Text(
+                '1,363 /ห้อง /คืน ฿',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
                 ],
               )
             ],
@@ -168,6 +188,11 @@ class HotelDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
           onPressed: () {
+            Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => BookingPage()),
+);
+
             print('Booking hotel...');
           },
           child: Text('Booking'),

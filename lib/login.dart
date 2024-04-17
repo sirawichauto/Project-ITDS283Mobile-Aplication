@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project2/Signup.dart';
 import 'home.dart';
+import 'Signup.dart';
 void main() {
   runApp(LoginApp());
 }
@@ -20,7 +22,9 @@ class LoginApp extends StatelessWidget {
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
+  
 }
+
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _usernameController = TextEditingController();
@@ -82,6 +86,10 @@ class _LoginPageState extends State<LoginPage> {
                   Spacer(),
                   ElevatedButton(
                     onPressed: () {
+                      Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpPage()), // HomePage() เป็นหน้า Home ที่คุณสร้างขึ้น
+                  );
                       // Add your authentication logic here
                       String username = _usernameController.text;
                       String password = _passwordController.text;

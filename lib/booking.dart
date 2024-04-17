@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'mytrips.dart';
 void main() {
   runApp(BookingApp());
 }
@@ -114,7 +114,11 @@ class _BookingPageState extends State<BookingPage> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => MyTripPage()),
+);
+
                           },
                           child: Text('OK'),
                         ),

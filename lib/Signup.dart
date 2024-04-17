@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'login.dart';
 void main() {
   runApp(SignUpApp());
 }
@@ -56,6 +56,10 @@ class _SignUpPageState extends State<SignUpPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                   Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => LoginPage()), // LoginPage() เป็นหน้า Login ที่คุณสร้างขึ้น
+  );
                   String username = _usernameController.text;
                   String email = _emailController.text;
                   String password = _passwordController.text;
@@ -67,6 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   print('Password: $password');
                   print('Phone: $phone');
                   print('Country: $country');
+                  
                 },
                 child: Text('Sign Up'),
               ),
@@ -78,19 +83,21 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _buildTextFormFieldWithLabel(String label, TextEditingController controller) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        SizedBox(height: 4), // ลดระยะห่างให้กล่องเหลี่ยมเล็กลง
-        TextFormField(
-          controller: controller,
-          decoration: InputDecoration(
-            hintText: label,
-            border: OutlineInputBorder(),
-          ),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(label),
+      SizedBox(height: 4), // ลดระยะห่างให้กล่องเหลี่ยมเล็กลง
+      TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: label,
+          border: OutlineInputBorder(),
+          contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0), // กำหนดค่า contentPadding ที่เหมาะสม
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
+
 }
