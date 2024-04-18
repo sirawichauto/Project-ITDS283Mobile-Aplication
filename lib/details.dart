@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'booking.dart';
+
+
 void main() {
   runApp(HotelDetailsApp());
 }
@@ -28,13 +30,27 @@ class HotelDetailsPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => HomePage()), // HomePage() เป็นหน้า Home ที่คุณสร้างขึ้น
-);
-
-
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
           },
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart), // ไอคอนตระกร้า
+            onPressed: () {
+  // เปลี่ยนหน้าไปยังหน้า Booking
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => BookingPage()),
+  );
+
+  // พิมพ์ข้อความเมื่อปุ่มตะกร้าถูกกด
+  print('Shopping cart button pressed');
+},
+
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(60.0),
           child: Padding(
@@ -99,7 +115,7 @@ class HotelDetailsPage extends StatelessWidget {
                   SizedBox(width: 3.0), // Add spacing between images
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(.0),
+                      padding: const EdgeInsets.all(0),
                       child: Image.asset(
                         'assets/detail3.png',
                         width: 200.0,
@@ -172,12 +188,12 @@ class HotelDetailsPage extends StatelessWidget {
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 5
                   SizedBox(width: 120.0), 
                   Text(
-                '1,363 /ห้อง /คืน ฿',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                ),
-              ),
+                    '1,363 /ห้อง /คืน ฿',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
                 ],
               )
             ],
@@ -189,9 +205,9 @@ class HotelDetailsPage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => BookingPage()),
-);
+              context,
+              MaterialPageRoute(builder: (context) => BookingPage()),
+            );
 
             print('Booking hotel...');
           },
