@@ -77,6 +77,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(errorText: "Invalid password"),
+      
+                ]),
                 onSaved: (password){
                   profile.password = password;
                 },
