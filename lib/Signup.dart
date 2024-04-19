@@ -1,5 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:project2/models/profile.dart';
+import 'package:toastification/toastification.dart';
 import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+// import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 void main() {
   runApp(SignUpApp());
@@ -24,6 +32,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final formKey = GlobalKey<FormState>();
+  Profile profile = Profile();
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _surnameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -40,51 +51,100 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildTextFormFieldWithLabel('ชื่อ', _usernameController),
-            SizedBox(height: 10.0),
-            _buildTextFormFieldWithLabel('นามสกุล', _surnameController),
-            SizedBox(height: 10.0),
-            _buildTextFormFieldWithLabel('ที่อยู่อีเมล', _emailController),
-            SizedBox(height: 10.0),
-            _buildTextFormFieldWithLabel('หมายเลขโทรศัพท์', _phoneController),
-            SizedBox(height: 10.0),
-            _buildTextFormFieldWithLabel('ประเทศ/ภูมิภาค', _countryController),
-            Spacer(),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  // เปลี่ยนเส้นทางการเรียกหน้า
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()), // LoginPage() เป็นหน้า Login ที่คุณสร้างขึ้น
-                  );
-                  
-                  String username = _usernameController.text;
-                  String surname = _surnameController.text;
-                  String email = _emailController.text;
-                  String phone = _phoneController.text;
-                  String country = _countryController.text;
-
-                  print('ชื่อ: $username');
-                  print('นามสกุล: $surname');
-                  print('ที่อยู่อีเมล: $email');
-                  print('หมายเลขโทรศัพท์: $phone');
-                  print('ประเทศ/ภูมิภาค: $country');
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.email(errorText: "Invalid Email"),
+                ]),
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+                onSaved: (email){
+                  profile.email = email;
                 },
-                child: Text('Sign Up'),
               ),
-            ),
-          ],
+              SizedBox(height: 10.0),
+              TextFormField(
+                controller: _surnameController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                onSaved: (password){
+                  profile.password = password;
+                },
+
+              ),
+              
+              Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    toastification.show(
+                          context: context,
+                          title: Text('Hello, world!'),
+                          autoCloseDuration: const Duration(seconds: 5),
+                        );
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      print(
+                          " email = ${profile.email} password = ${profile.password}");
+
+                      try {
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: profile.email!,
+                                password: profile.password!)
+                            .then((value) {
+                          formKey.currentState!.reset();
+                          // Fluttertoast.showToast(
+                          //     msg: "สร้างบัญชีผู้ใช้สำเร็จ",
+                          //     gravity: ToastGravity.CENTER);
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return LoginPage();
+                          }));
+                        });
+                      } on FirebaseAuthException catch (e) {
+                        print(e.code);
+                        print(e.message);
+                        String message;
+                        if (e.code == 'email-already-in-use') {
+                          message = "บัญชีนี้มีอยู่แล้ว";
+                        } else if (e.message == 'weak-password') {
+                          message = "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
+                        } else {
+                          message = e
+                              .message!; // ใช้ข้อความข้อผิดพลาดที่ส่งกลับจาก Firebase
+                        }
+                        
+                        // Fluttertoast.showToast(
+                        //   msg: message,
+                        //   gravity: ToastGravity.CENTER,
+                        // );
+                      }
+                    }
+                  },
+                  child: Text('Sign Up'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTextFormFieldWithLabel(String label, TextEditingController controller) {
+  Widget _buildTextFormFieldWithLabel(
+      String label, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -95,7 +155,9 @@ class _SignUpPageState extends State<SignUpPage> {
           decoration: InputDecoration(
             hintText: label,
             border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0), // กำหนดค่า contentPadding ที่เหมาะสม
+            contentPadding: EdgeInsets.symmetric(
+                vertical: 12.0,
+                horizontal: 10.0), // กำหนดค่า contentPadding ที่เหมาะสม
           ),
         ),
       ],

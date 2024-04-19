@@ -106,9 +106,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 80.0),
+              SizedBox(height: 40.0),
               Column(
                 children: [
+                  SizedBox(height: 10.0),
+                  Text(
+                    'Log in with social',
+                    style: TextStyle(
+                      fontSize: 10.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   SizedBox(height: 10.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -129,14 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Log in with social',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  
                 ],
               ),
               SizedBox(height: 20.0),
@@ -156,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 50.0), 
+              SizedBox(height: 40.0), 
             ],
           ),
         ),
