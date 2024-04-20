@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project2/models/profile.dart';
-import 'details.dart';
-import 'mytrips.dart';
-import 'Cart.dart';
-import 'profile.dart';
-
-
-void main() {
-  runApp(HomeApp());
-}
+import 'package:project2/Cart.dart';
+import 'package:project2/details.dart';
+import 'package:project2/mytrips.dart';
+import 'package:project2/profile.dart';
 
 class HomeApp extends StatelessWidget {
   @override
@@ -18,7 +12,8 @@ class HomeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8), // เพิ่มความโปร่งใสให้กับ Navigation Bar
+          backgroundColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8),
+          elevation: 100, // เพิ่มความโปร่งใสให้กับ Navigation Bar
         ),
       ),
       // เพิ่มการกำหนดเส้นทางของหน้า DetailsPage
@@ -59,7 +54,10 @@ class _HomePage extends State<HomePage> {
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide.none,
+                    borderSide: BorderSide(
+                      width: 2.0, // กำหนดความหนาของเส้นกรอบ
+                      color: Colors.blue, // กำหนดสีของเส้นกรอบ
+                    ),
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                 ),
@@ -170,37 +168,37 @@ class _HomePage extends State<HomePage> {
   }
 
   void _onItemTapped(int index) {
-  setState(() {
-    _selectedIndex = index;
-  });
+    setState(() {
+      _selectedIndex = index;
+    });
 
-  switch (index) {
-    case 0:
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-      break;
-    case 1:
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MyTripApp()),
-      );
-      break;
-    case 2:
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => CartApp()),
-      );
-      break;
-    case 3:
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProfilePage()),
-      );
-      break;
-    default:
-      break;
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyTripApp()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartApp()),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+      default:
+        break;
+    }
   }
-}
 }
