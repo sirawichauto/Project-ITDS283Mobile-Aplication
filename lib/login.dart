@@ -158,46 +158,48 @@ class _LoginPageState extends State<LoginPage> {
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
                       onPressed: () async {
-                        toastification.show(
-                          context: context,
-                          title: Text('เกิดข้อผิดพลาด!!!'),
-                          autoCloseDuration: const Duration(seconds: 5),
-                        );
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          print(
-                              " email = ${profile.email} password = ${profile.password}");
+  if (formKey.currentState!.validate()) {
+    formKey.currentState!.save();
+    print("email = ${profile.email} password = ${profile.password}");
 
-                          try {
-                            await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(
-                                    email: profile.email!,
-                                    password: profile.password!)
-                                .then((value) {
-                              formKey.currentState!.reset();
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()),
-                              );
-                            });
-                          } on FirebaseAuthException catch (e) {
-                            print(e.code);
-                            print(e.message);
-                            String message;
-                            if (e.code == 'invalid-credential') {
-                              message = "อีเมล หรือ รหัสผ่านไม่ถูกต้อง";
-                            } else {
-                              message = e
-                                  .message!; // ใช้ข้อความข้อผิดพลาดที่ส่งกลับจาก Firebase
-                            }
-                            // Fluttertoast.showToast(
-                            //   msg: message,
-                            //   gravity: ToastGravity.CENTER,
-                            // );
-                          }
-                        }
-                      },
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: profile.email!,
+              password: profile.password!)
+          .then((value) {
+        formKey.currentState!.reset();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage()),
+        );
+        // Show welcome message if login is successful
+        toastification.show(
+          context: context,
+          title: Text('Welcome Home Page'),
+          autoCloseDuration: const Duration(seconds: 5),
+        );
+      });
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      print(e.message);
+      String message;
+      if (e.code == 'invalid-credential') {
+        message = "Username or password is incorrect";
+      } else {
+        message = e.message!;
+      }
+      // Show error message if login fails
+      toastification.show(
+        context: context,
+        title: Text(message),
+        autoCloseDuration: const Duration(seconds: 5),
+      );
+    }
+  }
+},
+
                       child: Text('Log in'),
                     ),
                   ),
