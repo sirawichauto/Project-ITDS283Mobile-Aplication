@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'Cart.dart';
 import 'profile.dart';
+
 void main() {
   runApp(MyTripApp());
 }
@@ -26,40 +27,6 @@ class MyTripPage extends StatefulWidget {
 
 class _MyTripPageState extends State<MyTripPage> {
   int _selectedIndex = 0;
-
-   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    switch (index) {
-      case 0: // หน้า Home
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-        break;
-
-      case 1: // หน้า Mytrips (ตัวเอง)
-        break;
-
-      case 2: // หน้า Cart
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => CartApp()),
-        );
-        break;
-
-      case 3: // หน้า Profile
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
-        );
-        break;
-
-      default:
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,8 +146,43 @@ class _MyTripPageState extends State<MyTripPage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        onTap: _onItemTapped, // เรียกใช้ _onItemTapped เมื่อแตะที่ไอเท็มใน BottomNavigationBar
       ),
     );
   }
+
+   void _onItemTapped(int index) {
+  setState(() {
+    _selectedIndex = index;
+  });
+
+  switch (index) {
+    case 0:
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+      break;
+    case 1:
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyTripApp()),
+      );
+      break;
+    case 2:
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CartApp()),
+      );
+      break;
+    case 3:
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfilePage()),
+      );
+      break;
+    default:
+      break;
+  }
+}
 }
