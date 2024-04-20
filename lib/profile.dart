@@ -78,82 +78,84 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CircleAvatar(
-              radius: 100,
-              backgroundImage: AssetImage('assets/profile4.png'), // รูปโปรไฟล์
-            ),
-            SizedBox(height: 30),
-            TextFormField(
-              textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
-              decoration: InputDecoration(
-                labelText: 'ชื่อ',
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+      body: SingleChildScrollView( // ให้ส่วนของหน้าจอเลื่อนได้
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              CircleAvatar(
+                radius: 100,
+                backgroundImage: AssetImage('assets/profile4.png'), // รูปโปรไฟล์
               ),
+              SizedBox(height: 30),
+              TextFormField(
+                textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
+                decoration: InputDecoration(
+                  labelText: 'ชื่อ',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                ),
+                
+              ),
+              SizedBox(height: 20), // เพิ่มระยะห่าง
+              TextFormField(
+                textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
+                decoration: InputDecoration(
+                  labelText: 'นามสกุล',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                ),
+               
+              ),
+              SizedBox(height: 20), // เพิ่มระยะห่าง
+              TextFormField(
+                textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
+                decoration: InputDecoration(
+                  labelText: 'อีเมล',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                ),
+                
+              ),
+              SizedBox(height: 20), // เพิ่มระยะห่าง
+              TextFormField(
+                textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
+                decoration: InputDecoration(
+                  labelText: 'หมายเลขโทรศัพท์',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                ),
               
-            ),
-            SizedBox(height: 20), // เพิ่มระยะห่าง
-            TextFormField(
-              textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
-              decoration: InputDecoration(
-                labelText: 'นามสกุล',
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
               ),
-             
-            ),
-            SizedBox(height: 20), // เพิ่มระยะห่าง
-            TextFormField(
-              textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
-              decoration: InputDecoration(
-                labelText: 'อีเมล',
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
-              ),
+              SizedBox(height: 20), // เพิ่มระยะห่าง
+              TextFormField(
+                textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
+                decoration: InputDecoration(
+                  labelText: 'ประเทศ',
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+                ),
               
-            ),
-            SizedBox(height: 20), // เพิ่มระยะห่าง
-            TextFormField(
-              textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
-              decoration: InputDecoration(
-                labelText: 'หมายเลขโทรศัพท์',
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
               ),
-            
-            ),
-            SizedBox(height: 20), // เพิ่มระยะห่าง
-            TextFormField(
-              textAlignVertical: TextAlignVertical.center, // จัดกล่องข้อความให้อยู่ตรงกลาง
-              decoration: InputDecoration(
-                labelText: 'ประเทศ',
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+              SizedBox(height: 20), // เพิ่มระยะห่าง
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+                  // ระบบบันทึกข้อมูล
+                },
+                child: Text('บันทึก'),
               ),
-            
-            ),
-            SizedBox(height: 20), // เพิ่มระยะห่าง
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-    );
-                // ระบบบันทึกข้อมูล
-              },
-              child: Text('บันทึก'),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
