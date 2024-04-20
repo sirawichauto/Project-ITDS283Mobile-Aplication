@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:project2/Signup.dart';
 import 'package:project2/models/profile.dart';
@@ -61,11 +60,11 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: EdgeInsets.all(30),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 10.0),
                 TextFormField(
                   controller: _usernameController,
                   decoration: InputDecoration(
-                    labelText: 'Username',
+                    labelText: 'Email',
                     border: OutlineInputBorder(),
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -159,11 +158,11 @@ class _LoginPageState extends State<LoginPage> {
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
                       onPressed: () async {
-                        // toastification.show(
-                        //   context: context,
-                        //   title: Text('เกิดข้อผิดพลาด!!!'),
-                        //   autoCloseDuration: const Duration(seconds: 5),
-                        // );
+                        toastification.show(
+                          context: context,
+                          title: Text('เกิดข้อผิดพลาด!!!'),
+                          autoCloseDuration: const Duration(seconds: 5),
+                        );
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
                           print(
@@ -192,10 +191,10 @@ class _LoginPageState extends State<LoginPage> {
                               message = e
                                   .message!; // ใช้ข้อความข้อผิดพลาดที่ส่งกลับจาก Firebase
                             }
-                            Fluttertoast.showToast(
-                              msg: message,
-                              gravity: ToastGravity.CENTER,
-                            );
+                            // Fluttertoast.showToast(
+                            //   msg: message,
+                            //   gravity: ToastGravity.CENTER,
+                            // );
                           }
                         }
                       },

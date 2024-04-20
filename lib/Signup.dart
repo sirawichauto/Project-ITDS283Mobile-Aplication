@@ -4,9 +4,6 @@ import 'package:project2/models/profile.dart';
 import 'package:toastification/toastification.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-// import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 void main() {

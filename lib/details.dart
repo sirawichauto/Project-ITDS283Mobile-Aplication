@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'booking.dart';
-
+import 'location.dart';
 
 void main() {
   runApp(HotelDetailsApp());
@@ -39,16 +39,15 @@ class HotelDetailsPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.shopping_cart), // ไอคอนตระกร้า
             onPressed: () {
-  // เปลี่ยนหน้าไปยังหน้า Booking
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => BookingPage()),
-  );
+              // เปลี่ยนหน้าไปยังหน้า Booking
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BookingPage()),
+              );
 
-  // พิมพ์ข้อความเมื่อปุ่มตะกร้าถูกกด
-  print('Shopping cart button pressed');
-},
-
+              // พิมพ์ข้อความเมื่อปุ่มตะกร้าถูกกด
+              print('Shopping cart button pressed');
+            },
           ),
         ],
         bottom: PreferredSize(
@@ -170,6 +169,10 @@ class HotelDetailsPage extends StatelessWidget {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapSample()),
+                      );
                       // Handle location button press
                       print('Location button pressed');
                     },
@@ -186,7 +189,7 @@ class HotelDetailsPage extends StatelessWidget {
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 3
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 4
                   Icon(Icons.star, color: Colors.yellow), // ดาวที่ 5
-                  SizedBox(width: 120.0), 
+                  SizedBox(width: 120.0),
                   Text(
                     '1,363 /ห้อง /คืน ฿',
                     style: TextStyle(
