@@ -194,10 +194,10 @@ class _MyTripPageState extends State<MyTripPage> {
                   Row(
                     children: [
                       Checkbox(
-                        value: _isCheckedList[0], // Use value from the list
+                        value: _isCheckedList[1], // Use value from the list
                         onChanged: (bool? value) {
                           setState(() {
-                            _isCheckedList[0] = value ?? false; // Update value in the list
+                            _isCheckedList[1] = value ?? false; // Update value in the list
                           });
                         },
                       ),
