@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text(''),
       ),
       body: SingleChildScrollView( // Wrap with SingleChildScrollView to make the screen scrollable
         child: Center(
