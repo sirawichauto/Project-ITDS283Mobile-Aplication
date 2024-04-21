@@ -88,47 +88,45 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () async {
-                    toastification.show(
-                          context: context,
-                          title: Text('สร้างบัญชีผู้ใช้สำเร็จ'),
-                          autoCloseDuration: const Duration(seconds: 5),
-                        );
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      print(
-                          " email = ${profile.email} password = ${profile.password}");
+  onPressed: () async {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      print(" email = ${profile.email} password = ${profile.password}");
 
-                      try {
-                        await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: profile.email!,
-                                password: profile.password!)
-                            .then((value) {
-                          formKey.currentState!.reset();
-                          
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return LoginPage();
-                          }));
-                        });
-                      } on FirebaseAuthException catch (e) {
-                        print(e.code);
-                        print(e.message);
-                        String message;
-                        if (e.code == 'email-already-in-use') {
-                          message = "บัญชีนี้มีอยู่แล้ว";
-                        } else if (e.message == 'weak-password') {
-                          message = "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
-                        } else {
-                          message = e
-                              .message!; // ใช้ข้อความข้อผิดพลาดที่ส่งกลับจาก Firebase
-                        }
-                      }
-                    }
-                  },
-                  child: Text('Sign Up'),
-                ),
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: profile.email!,
+          password: profile.password!)
+          .then((value) {
+            formKey.currentState!.reset();
+            Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+                return LoginPage();
+              }));
+            toastification.show( // เพิ่มบรรทัดนี้เพื่อแสดงข้อความ Sign-up Success
+              context: context,
+              title: Text('Sign-up Success'),
+              autoCloseDuration: const Duration(seconds: 5),
+            );
+          });
+      } on FirebaseAuthException catch (e) {
+        print(e.code);
+        print(e.message);
+        String message;
+        if (e.code == 'email-already-in-use') {
+          message = "บัญชีนี้มีอยู่แล้ว";
+        } else if (e.message == 'weak-password') {
+          message = "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
+        } else {
+          message = e.message!;
+        }
+      }
+    }
+  },
+  child: Text('Sign Up'),
+),
+
+
               ),
             ],
           ),
