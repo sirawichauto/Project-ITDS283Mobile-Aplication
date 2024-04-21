@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'booking.dart';
 import 'location.dart';
+import 'Cart.dart';
 
 void main() {
   runApp(HotelDetailsApp());
@@ -42,7 +43,7 @@ class HotelDetailsPage extends StatelessWidget {
               // เปลี่ยนหน้าไปยังหน้า Booking
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BookingPage()),
+                MaterialPageRoute(builder: (context) => CartApp()),
               );
 
               // พิมพ์ข้อความเมื่อปุ่มตะกร้าถูกกด
