@@ -91,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: () async {
                     toastification.show(
                           context: context,
-                          title: Text('Hello, world!'),
+                          title: Text('สร้างบัญชีผู้ใช้สำเร็จ'),
                           autoCloseDuration: const Duration(seconds: 5),
                         );
                     if (formKey.currentState!.validate()) {
@@ -106,9 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 password: profile.password!)
                             .then((value) {
                           formKey.currentState!.reset();
-                          // Fluttertoast.showToast(
-                          //     msg: "สร้างบัญชีผู้ใช้สำเร็จ",
-                          //     gravity: ToastGravity.CENTER);
+                          
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (context) {
                             return LoginPage();
@@ -126,11 +124,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           message = e
                               .message!; // ใช้ข้อความข้อผิดพลาดที่ส่งกลับจาก Firebase
                         }
-                        
-                        // Fluttertoast.showToast(
-                        //   msg: message,
-                        //   gravity: ToastGravity.CENTER,
-                        // );
                       }
                     }
                   },
