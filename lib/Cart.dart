@@ -213,14 +213,14 @@ class _MyTripPageState extends State<MyTripPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('12 Mar - 13 Mar, 2024 (1 night)'),
+                  Text('14 Mar - 15 Mar, 2024 (1 night)'),
                   SizedBox(height: 4.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SizedBox(height: 50),
                       Text(
-                        '1250 ฿',
+                        '1100 ฿',
                         textAlign: TextAlign.center,
                       ),
                     ],
